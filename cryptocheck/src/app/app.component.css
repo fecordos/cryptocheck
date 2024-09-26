@@ -1,0 +1,24 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  background: url("/bg.jpg") no-repeat center/100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  height: 100vh;
+  width: 80vw;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coins-container {
+  height: 80vh;
+  width: 75vw;
+}

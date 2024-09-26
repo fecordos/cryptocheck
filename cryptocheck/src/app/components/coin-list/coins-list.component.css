@@ -1,0 +1,56 @@
+.mat-form-field {
+  width: 100%;
+
+  input {
+    font-size: 1.25rem;
+  }
+}
+
+table {
+  width: 100%;
+
+  th {
+    background-color: rgb(30, 72, 126);
+    color: #fff;
+    font-size: 1rem;
+  }
+}
+
+.banner {
+  background: url("/bgd.jpg") no-repeat center;
+  height: 45%;
+  width: 100%;
+  color: #fff;
+}
+
+.header {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-header {
+ height: 50%;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid red;
+
+    .card {
+      margin: 2rem;
+    }
+  }
+}
+
+h1 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.8rem;
+  color: rgb(162, 128, 66);
+
+  padding: 35px;
+}

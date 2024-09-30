@@ -24,7 +24,6 @@ table {
 }
 
 .header {
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +31,7 @@ table {
 }
 
 .sub-header {
- height: 50%;
+  height: 50%;
 
   .row {
     display: flex;
@@ -53,4 +52,22 @@ h1 {
   color: rgb(162, 128, 66);
 
   padding: 35px;
+}
+
+.coin-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 15px;
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(162, 128, 66);
+
+    img {
+      transform: scale(1.1);
+    }
+  }
 }

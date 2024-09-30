@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">
       <h1>Crypto Check</h1>
-      <h6>Check all the crypto currency lastest updates</h6>
+      <h6>Check all the crypto currency latest updates</h6>
     </div>
     <div class="sub-header">
       <marquee
@@ -13,20 +13,20 @@
         direction="left"
       >
         <div class="row">
-          @for (row of bannerData; track row.position) {
+          @for (row of bannerData; track row.symbol) {
           <ng-container>
             <div class="col-1">
               <div class="card">
-                <img [src]="row.image" width="100" class="img-fluid" alt="" />
+                <img [src]="row.iconUrl" width="35" class="img-fluid" alt="" />
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ row.symbol }}
                     <span class="text-danger"
-                      >{{ row.market_cap_change_percentage_24h }}%</span
+                      >{{ row.change }}%</span
                     >
                   </h5>
                   <p class="card-text">
-                    {{ row.current_price }}
+                    {{ row.price }}
                   </p>
                 </div>
               </div>
@@ -58,55 +58,57 @@
     (matSortChange)="announceSortChange($event)"
   >
     <!-- Coin Column -->
-    <ng-container matColumnDef="position">
+    <ng-container matColumnDef="uuid">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by number"
+        sortActionDescription="Sort by uuid"
       >
         Coin
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      <td mat-cell *matCellDef="let element" class="coin-cell">
+        <img [src]="element.iconUrl" width="35" />
+        {{ element.symbol}}</td>
     </ng-container>
 
     <!-- Price Column -->
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="price">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by name"
+        sortActionDescription="Sort by price"
       >
         Price
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
     </ng-container>
 
     <!-- 24h Change Column -->
-    <ng-container matColumnDef="weight">
+    <ng-container matColumnDef="_24hVolume">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by weight"
+        sortActionDescription="Sort by volume"
       >
-        24h Change
+        24h Change change %
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.change }}</td>
     </ng-container>
 
     <!-- Market Cap Column -->
-    <ng-container matColumnDef="symbol">
+    <ng-container matColumnDef="marketCap">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by symbol"
+        sortActionDescription="Sort by marketCap"
       >
         Market Cap
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.marketCap }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -127,7 +129,7 @@
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 50, 100]"
     showFirstLastButtons
-    aria-label="Select page of periodic elements"
+    aria-label="Select page of coins list"
   >
   </mat-paginator>
 </div>

@@ -72,6 +72,13 @@
   padding: 25px;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 * {
-  color: #fff;
+  color: #a78585;
 }

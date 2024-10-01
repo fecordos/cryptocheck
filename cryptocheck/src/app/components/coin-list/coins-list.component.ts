@@ -13,6 +13,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { CommonModule, CurrencyPipe, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-coins-list',
@@ -23,6 +24,9 @@ import { ApiService } from '../../services/api.service';
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    NgOptimizedImage,
+    CurrencyPipe,
+    CommonModule,
   ],
   templateUrl: './coins-list.component.html',
   styleUrl: './coins-list.component.css',
@@ -35,6 +39,7 @@ export class CoinsListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['uuid', 'price', '_24hVolume', 'marketCap'];
   //dataSource = new MatTableDataSource<Coin>(COIN_DATA);
   dataSource: any;
+  currency: string = 'USD';
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

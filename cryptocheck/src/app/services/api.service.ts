@@ -21,4 +21,8 @@ export class ApiService {
   public getCurrencyById(coinId: string) {
     return this.http.get<any>(`${this.apiUrl}/coin/${coinId}`, {headers: this.headers});
   }
+
+  public getGraphData(coinId: string, days: number) {
+    return this.http.get<any>(`${this.apiUrl}/coin/${coinId}/history?timePeriod=${days}d`, {headers: this.headers});
+  }
 }

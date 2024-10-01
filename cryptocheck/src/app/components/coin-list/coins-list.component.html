@@ -17,13 +17,19 @@
           <ng-container>
             <div class="col-1">
               <div class="card">
-                <img [src]="row.iconUrl" width="35" class="img-fluid" alt="" />
+                <img
+                  [ngSrc]="row.iconUrl"
+                  [ngSrcset]="'1x, 2x'"
+                  sizes="45px"
+                  width="45"
+                  height="45"
+                  class="img-fluid"
+                  alt="currency icon"
+                />
                 <div class="card-body">
                   <h5 class="card-title">
                     {{ row.symbol }}
-                    <span class="text-danger"
-                      >{{ row.change }}%</span
-                    >
+                    <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'">{{ row.change }}%</span>
                   </h5>
                   <p class="card-text">
                     {{ row.price }}
@@ -68,12 +74,21 @@
         Coin
       </th>
       <td mat-cell *matCellDef="let element" class="coin-cell">
-        <img [src]="element.iconUrl" width="35" />
-        {{ element.symbol}}</td>
+        {{ element.rank}}
+        <img
+          [ngSrc]="element.iconUrl"
+          [ngSrcset]="'1x, 2x'"
+          sizes="35px"
+          width="35"
+          height="35"
+          alt="icon image"
+        />
+        {{ element.symbol }}
+      </td>
     </ng-container>
 
     <!-- Price Column -->
-    <ng-container matColumnDef="price">
+    <ng-container matColumnDef="price" class="bold-text">
       <th
         mat-header-cell
         *matHeaderCellDef
@@ -82,20 +97,20 @@
       >
         Price
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      <td class="bold-text" mat-cell *matCellDef="let element">{{ element.price | currency: currency }}</td>
     </ng-container>
 
     <!-- 24h Change Column -->
-    <ng-container matColumnDef="_24hVolume">
+    <ng-container matColumnDef="_24hVolume" class="bold-text">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
         sortActionDescription="Sort by volume"
       >
-        24h Change change %
+        24h
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.change }}</td>
+      <td class="bold-text" mat-cell *matCellDef="let element" [ngClass]="element.change < 0 ? 'red-text' : 'green-text'">{{ element.change }}%</td>
     </ng-container>
 
     <!-- Market Cap Column -->
@@ -108,7 +123,7 @@
       >
         Market Cap
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.marketCap }}</td>
+      <td class="bold-text" mat-cell *matCellDef="let element">{{ element.marketCap | currency : currency }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

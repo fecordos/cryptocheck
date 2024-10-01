@@ -2,7 +2,14 @@
   <div class="row">
     <div class="currency-info-container details">
       <div class="coin-info">
-        <img [src]="coinData?.coin?.iconUrl" style="width: 100px;" alt="icon image" />
+        <img
+          [ngSrc]="coinData?.coin?.iconUrl"
+          [ngSrcset]="'1x, 2x'"
+          sizes="100px"
+          width="100"
+          height="100"
+          alt="icon image"
+        />
         <h3 class="coin-name">
           {{ coinData?.coin?.name }}
         </h3>
@@ -10,13 +17,13 @@
         <div class="more-details">
           <span class="title">Rank: </span>
           <span class="value">{{ coinData?.coin?.rank }}</span>
-          <br>
+          <br />
 
           <span class="title">Current Price: </span>
           <span class="value">{{
             coinData?.coin?.price | currency : currency
           }}</span>
-          <br>
+          <br />
 
           <span class="title">Market Cap: </span>
           <span class="value">{{
@@ -26,20 +33,28 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="chart-container">
       <canvas
-        style="width: 300px"
+        style="width: 900px; height: 600px"
         baseChart
         [data]="lineChartData"
         [options]="lineChartOptions"
         [type]="lineChartType"
       ></canvas>
       <div class="d-flex justify-content-around">
-        <button (click)="getGraphData(1)" class="btn btn-custom">24 hours</button>
-        <button (click)="getGraphData(30)" class="btn btn-custom">30 days</button>
-        <button (click)="getGraphData(90)" class="btn btn-custom">90 days</button>
-        <button (click)="getGraphData(365)" class="btn btn-custom">1 year</button>
-    </div>
+        <button (click)="getGraphData(1)" class="btn btn-custom">
+          24 hours
+        </button>
+        <button (click)="getGraphData(30)" class="btn btn-custom">
+          30 days
+        </button>
+        <button (click)="getGraphData(90)" class="btn btn-custom">
+          90 days
+        </button>
+        <button (click)="getGraphData(365)" class="btn btn-custom">
+          1 year
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -23,7 +23,6 @@
                   sizes="45px"
                   width="45"
                   height="45"
-                  class="img-fluid"
                   alt="currency icon"
                 />
                 <div class="card-body">
@@ -56,7 +55,7 @@
   />
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<div class="">
   <table
     mat-table
     [dataSource]="dataSource"
@@ -64,12 +63,12 @@
     (matSortChange)="announceSortChange($event)"
   >
     <!-- Coin Column -->
-    <ng-container matColumnDef="uuid">
+    <ng-container matColumnDef="symbol">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by uuid"
+        sortActionDescription="Sort by symbol"
       >
         Coin
       </th>
@@ -101,12 +100,12 @@
     </ng-container>
 
     <!-- 24h Change Column -->
-    <ng-container matColumnDef="_24hVolume" class="bold-text">
+    <ng-container matColumnDef="change" class="bold-text">
       <th
         mat-header-cell
         *matHeaderCellDef
         mat-sort-header
-        sortActionDescription="Sort by volume"
+        sortActionDescription="Sort by change"
       >
         24h
       </th>

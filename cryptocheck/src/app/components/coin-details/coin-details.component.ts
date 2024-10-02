@@ -15,8 +15,10 @@ import { ApiService } from '../../services/api.service';
 export class CoinDetailsComponent implements OnInit {
   coinData: any;
   coinId!: string;
-  days: number = 30;
+  timePeriod: string = '24h';
   currency: string = 'USD';
+  coinHLAValues: any;
+
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
       {
@@ -60,35 +62,39 @@ export class CoinDetailsComponent implements OnInit {
       this.coinId = params['id'];
     });
     this.getCoinData();
-    this.getGraphData(this.days);
+    this.getCoinHLA();
+    this.getGraphData(this.timePeriod);
   }
 
   getCoinData() {
-    this.api.getCurrencyById(this.coinId).subscribe((res) => {
-      console.log(res.data.coin);
+    this.api.getCoinById(this.coinId).subscribe((res) => {
       this.coinData = res.data;
     });
   }
 
-  getGraphData(days: number) {
-    this.days = days;
-    this.api.getGraphData(this.coinId, this.days).subscribe((res) => {
-      console.log('graph data:', res.data.history[0]['timestamp']);
+  getGraphData(timePeriod: string) {
+    this.timePeriod = timePeriod;
+    this.api.getCoinGraphData(this.coinId, this.timePeriod).subscribe((res) => {
       setTimeout(() => {
         this.myLineChart.chart?.update();
       }, 200);
       this.lineChartData.datasets[0].data = res.data.history.map(
         (val: any) => {
-        //  console.log("a1: ", val['price']);
           return val['price'];
         }
       );
       this.lineChartData.labels = res.data.history.map((a: any) => {
-        let date = new Date(a['timestamp']);
-       // console.log("date: ", date);
+        let date = new Date(a['timestamp']*1000);
         let time = date.getHours() > 12 ? `${date.getHours() - 12}:${date.getMinutes()} PM` : `${date.getHours()}:${date.getMinutes()} AM`;
-        return this.days === 1 ? time : date.toLocaleDateString();
+        return this.timePeriod === '3h' || this.timePeriod === '24h' ? time : date.toLocaleDateString();
       });
+    });
+  }
+
+  getCoinHLA() {
+    this.api.getCoinHLAValues(this.coinId).subscribe((res: any) => {
+      console.log(res.data);
+      this.coinHLAValues = res.data;
     });
   }
 }

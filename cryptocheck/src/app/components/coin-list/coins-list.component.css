@@ -17,7 +17,7 @@ table {
 }
 
 .banner {
-  background: url("/bgd.jpg") no-repeat center;
+ /* background: url("/bgd.jpg") no-repeat center;*/
   height: 45%;
   width: 100%;
   color: #fff;
@@ -36,6 +36,7 @@ table {
   .row {
     display: flex;
     flex-direction: row;
+    margin-bottom: 15px;
    
     .card {
       margin: 2rem;
@@ -50,7 +51,7 @@ h1 {
   letter-spacing: 0.8rem;
   color: rgb(162, 128, 66);
 
-  padding: 35px;
+  padding: 15px;
 }
 
 .coin-cell {

@@ -36,8 +36,7 @@ export class CoinsListComponent implements OnInit, AfterViewInit {
 
   bannerData: any = [];
 
-  displayedColumns: string[] = ['uuid', 'price', '_24hVolume', 'marketCap'];
-  //dataSource = new MatTableDataSource<Coin>(COIN_DATA);
+  displayedColumns: string[] = ['symbol', 'price', 'change', 'marketCap'];
   dataSource: any;
   currency: string = 'USD';
 
@@ -64,8 +63,7 @@ export class CoinsListComponent implements OnInit, AfterViewInit {
   }
 
   getAllData() {
-    this.api.getCurrency().subscribe((res) => {
-      console.log(res.data.coins);
+    this.api.getCoin().subscribe((res) => {
       this.bannerData = res.data.coins;
       this.dataSource = new MatTableDataSource(res.data.coins);
       this.dataSource.paginator = this.paginator;
@@ -101,99 +99,6 @@ export interface Coin {
   name: string;
   iconUrl: string;
   price: number;
-  _24hVolume: number;
+  change: number;
   marketCap: number;
 }
-
-/*const COIN_DATA: Coin[] = [
-  {
-    uuid: '1',
-    symbol: 'BTC',
-    name: 'Bitcoin',
-    iconUrl: 'https://cdn.coinranking.com/Sy33Krudb/btc.svg',
-    price: 100,
-    _24hVolume: 18,
-    marketCap: 188,
-  },
-  {
-    uuid: '2',
-    symbol: 'ETH',
-    name: 'Ethereum',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '3',
-    symbol: 'XRP',
-    name: 'XRP',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '4',
-    symbol: 'LTC',
-    name: 'Litecoin',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '5',
-    symbol: 'ADA',
-    name: 'Cardano',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '6',
-    symbol: 'XMR',
-    name: 'Monero',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '7',
-    symbol: 'DOGE',
-    name: 'Dogecoin',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '8',
-    symbol: 'DOT',
-    name: 'Polkadot',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '9',
-    symbol: 'XLM',
-    name: 'Stellar',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-  {
-    uuid: '10',
-    symbol: 'TRX',
-    name: 'Tron',
-    iconUrl: 'https://cdn.coinranking.com/BQVY5Zzg/eth.svg',
-    price: 180,
-    _24hVolume: 558,
-    marketCap: 4558,
-  },
-];*/

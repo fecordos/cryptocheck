@@ -41,18 +41,28 @@
         [options]="lineChartOptions"
         [type]="lineChartType"
       ></canvas>
-      <div class="d-flex justify-content-around">
-        <button (click)="getGraphData(1)" class="btn btn-custom">
-          24 hours
+      <div class="time-period-container">
+        <span>Time period</span>
+        <button (click)="getGraphData('3h')" class="btn btn-custom">
+          3H
         </button>
-        <button (click)="getGraphData(30)" class="btn btn-custom">
-          30 days
+        <button (click)="getGraphData('24h')" class="btn btn-custom">
+          24H
         </button>
-        <button (click)="getGraphData(90)" class="btn btn-custom">
-          90 days
+        <button (click)="getGraphData('7d')" class="btn btn-custom">
+          7D
         </button>
-        <button (click)="getGraphData(365)" class="btn btn-custom">
-          1 year
+        <button (click)="getGraphData('30d')" class="btn btn-custom">
+          30D
+        </button>
+        <button (click)="getGraphData('3m')" class="btn btn-custom">
+          3M
+        </button>
+        <button (click)="getGraphData('1y')" class="btn btn-custom">
+          1Y
+        </button>
+        <button (click)="getGraphData('3y')" class="btn btn-custom">
+          3Y
         </button>
       </div>
     </div>

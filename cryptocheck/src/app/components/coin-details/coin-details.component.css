@@ -79,6 +79,24 @@
   align-items: center;
 }
 
+.time-period-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    border: 1px solid #fff;
+    padding: 4px;
+    color: #fff;
+  }
+
+  button {
+    width: 45px;
+    padding: 5px;
+  }
+}
+
 * {
   color: #a78585;
 }

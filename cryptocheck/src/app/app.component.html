@@ -1,6 +1,10 @@
 <main class="main">
   <div class="content">
-    <div class="coins-container">
+    <mat-toolbar>
+      <div class="logo">
+        <img class="logo-img" src="/logo1.png" alt="logo name">
+      </div>
+     
       <mat-form-field>
         <mat-select
           (valueChange)="sendCurrencyId($event)"
@@ -12,9 +16,9 @@
           <mat-option value="RON">RON</mat-option>
         </mat-select>
       </mat-form-field>
-
+    </mat-toolbar>
+    <div class="coins-container">
       <router-outlet />
     </div>
   </div>
 </main>
-

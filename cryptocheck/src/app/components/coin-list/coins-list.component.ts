@@ -18,7 +18,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { CurrencyService } from '../../services/currency.service';
-import { get } from 'http';
 
 @Component({
   selector: 'app-coins-list',

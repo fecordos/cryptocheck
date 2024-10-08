@@ -1,8 +1,6 @@
 <div class="banner">
   <div class="container">
     <div class="header">
-
-      <h1>Crypto Check</h1>
       <h6>Check all the crypto currency latest updates</h6>
     </div>
     <div class="sub-header">
@@ -16,7 +14,7 @@
         <div class="row">
           @for (row of bannerData; track row.symbol) {
           <ng-container>
-            <div class="col-1">
+            <div>
               <div class="card">
                 <img
                   [ngSrc]="row.iconUrl"
@@ -28,11 +26,10 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">
-                    {{ row.symbol }}
-                    <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'"
-                      >{{ row.change }}%</span
-                    >
+                    {{ row.name }}
                   </h5>
+                  <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'"
+                    >{{ row.change }}%</span>
                   <p class="card-text">
                     {{ row.price | currency : selectedCurrency }}
                   </p>
@@ -73,7 +70,7 @@
         mat-sort-header
         sortActionDescription="Sort by symbol"
       >
-        Coin
+        All coins
       </th>
       <td mat-cell *matCellDef="let element" class="coin-cell">
         {{ element.rank }}
@@ -86,7 +83,7 @@
           alt="icon image"
         />
         <div class="coin-name">
-          <span class="coin-name-text">{{ element.name }}</span> 
+          <span class="coin-name-text">{{ element.name }}</span>
           <span class="coin-symbol-text">{{ element.symbol }}</span>
         </div>
       </td>

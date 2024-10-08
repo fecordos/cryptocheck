@@ -21,13 +21,13 @@
 
           <span class="title">Current Price: </span>
           <span class="value">{{
-            coinData?.coin?.price | currency : currency
+            coinData?.coin?.price | currency : selectedCurrency
           }}</span>
           <br />
 
           <span class="title">Market Cap: </span>
           <span class="value">{{
-            coinData?.coin?.marketCap | currency : currency
+            coinData?.coin?.marketCap | currency : selectedCurrency
           }}</span>
         </div>
       </div>

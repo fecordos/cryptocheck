@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ApiService } from '../../services/api.service';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-coin-details',
@@ -13,10 +14,12 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './coin-details.component.css',
 })
 export class CoinDetailsComponent implements OnInit {
+
   coinData: any;
   coinId!: string;
-  timePeriod: string = '24h';
-  currency: string = 'USD';
+  timePeriod = '24h';
+  currencyId = 'yhjMzLPhuIDl';
+  selectedCurrency = 'USD';
   coinHLAValues: any;
 
   public lineChartData: ChartConfiguration['data'] = {
@@ -51,30 +54,43 @@ export class CoinDetailsComponent implements OnInit {
 
   public lineChartType: ChartType = 'line';
   @ViewChild(BaseChartDirective) myLineChart!: BaseChartDirective;
-
+  
   constructor(
     private api: ApiService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private currencyService: CurrencyService,
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.coinId = params['id'];
+      this.getCoinData(this.currencyId);
+      this.getGraphData(this.timePeriod);
     });
-    this.getCoinData();
-    this.getCoinHLA();
-    this.getGraphData(this.timePeriod);
+
+    //Subscribe to currencyId changes and fetch graph data accordingly
+    this.currencyService.currencyId$.subscribe((newCurrencyId: string) => {
+      this.currencyId = newCurrencyId;
+
+      this.getCoinData(this.currencyId);
+      this.getGraphData(this.timePeriod);
+    });
+     
+    //Subscribe to selectedCurrency changes to format the prices properly
+    this.currencyService.selectedCurrency$.subscribe((newSelectedCurrency: string) => {
+      this.selectedCurrency = newSelectedCurrency;
+    });
   }
 
-  getCoinData() {
-    this.api.getCoinById(this.coinId).subscribe((res) => {
+  getCoinData(currencyId: string) {
+    this.api.getCoinById(this.coinId, currencyId).subscribe((res) => {
       this.coinData = res.data;
     });
   }
 
   getGraphData(timePeriod: string) {
     this.timePeriod = timePeriod;
-    this.api.getCoinGraphData(this.coinId, this.timePeriod).subscribe((res) => {
+    this.api.getCoinGraphData(this.coinId, this.currencyId, this.timePeriod).subscribe((res) => {
       setTimeout(() => {
         this.myLineChart.chart?.update();
       }, 200);
@@ -88,13 +104,6 @@ export class CoinDetailsComponent implements OnInit {
         let time = date.getHours() > 12 ? `${date.getHours() - 12}:${date.getMinutes()} PM` : `${date.getHours()}:${date.getMinutes()} AM`;
         return this.timePeriod === '3h' || this.timePeriod === '24h' ? time : date.toLocaleDateString();
       });
-    });
-  }
-
-  getCoinHLA() {
-    this.api.getCoinHLAValues(this.coinId).subscribe((res: any) => {
-      console.log(res.data);
-      this.coinHLAValues = res.data;
     });
   }
 }

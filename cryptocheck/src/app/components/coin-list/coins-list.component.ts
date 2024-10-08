@@ -14,6 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { CommonModule, CurrencyPipe, NgOptimizedImage } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { CurrencyService } from '../../services/currency.service';
+import { get } from 'http';
 
 @Component({
   selector: 'app-coins-list',
@@ -27,29 +32,51 @@ import { CommonModule, CurrencyPipe, NgOptimizedImage } from '@angular/common';
     NgOptimizedImage,
     CurrencyPipe,
     CommonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
   ],
   templateUrl: './coins-list.component.html',
   styleUrl: './coins-list.component.css',
 })
 export class CoinsListComponent implements OnInit, AfterViewInit {
+
   private _liveAnnouncer = inject(LiveAnnouncer);
+
+  currencyId = 'yhjMzLPhuIDl';
+  selectedCurrency = 'USD';
 
   bannerData: any = [];
 
   displayedColumns: string[] = ['symbol', 'price', 'change', 'marketCap'];
   dataSource: any;
-  currency: string = 'USD';
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private currencyService: CurrencyService
+  ) {}
+
   ngOnInit(): void {
-    this.getAllData();
+    //Subcribe to the currency changes
+    this.currencyService.currencyId$.subscribe((newCurrencyId: string) => {
+      this.currencyId = newCurrencyId;
+      this.getAllData(this.currencyId);
+    });
+
+    //Subscribe to the selected currency changes
+    this.currencyService.selectedCurrency$.subscribe((newSelectedCurrency: string) => {
+      this.selectedCurrency = newSelectedCurrency;
+    });
+
     this.dataSource.filterPredicate = (data: Coin, filter: string) => {
       const transformedFilter = filter.trim().toLowerCase();
-      // Check if any of the fields contain the filter text
+
       return (
         data.name.toLowerCase().includes(transformedFilter) ||
         data.symbol.toLowerCase().includes(transformedFilter)
@@ -62,8 +89,8 @@ export class CoinsListComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  getAllData() {
-    this.api.getCoin().subscribe((res) => {
+  getAllData(currencyId: string) {
+    this.api.getCoins(currencyId).subscribe((res) => {
       this.bannerData = res.data.coins;
       this.dataSource = new MatTableDataSource(res.data.coins);
       this.dataSource.paginator = this.paginator;

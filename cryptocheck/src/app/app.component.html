@@ -1,6 +1,18 @@
 <main class="main">
   <div class="content">
     <div class="coins-container">
+      <mat-form-field>
+        <mat-select
+          (valueChange)="sendCurrencyId($event)"
+          class="text-sm"
+          [(ngModel)]="selectedCurrency"
+        >
+          <mat-option selected value="USD">USD</mat-option>
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="RON">RON</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <router-outlet />
     </div>
   </div>

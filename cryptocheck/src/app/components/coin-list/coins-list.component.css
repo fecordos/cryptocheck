@@ -17,7 +17,6 @@ table {
 }
 
 .banner {
- /* background: url("/bgd.jpg") no-repeat center;*/
   height: 45%;
   width: 100%;
   color: #fff;
@@ -55,13 +54,14 @@ h1 {
 }
 
 .coin-cell {
+ 
   display: flex;
   align-items: center;
   gap: 0.5rem;
 
   padding: 15px;
   font-weight: 600;
-
+   
   &:hover {
     cursor: pointer;
     color: rgb(162, 128, 66);
@@ -70,6 +70,17 @@ h1 {
       transform: scale(1.1);
     }
   }
+}
+
+.coin-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.coin-symbol-text {
+  font-weight: 500;
 }
 
 .bold-text {

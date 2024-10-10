@@ -1,38 +1,47 @@
 .main {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.content {
-  height: 100vh;
-  width: 100vw;
-  /*background-color: rgba(0, 0, 0, 0.7);*/
-  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+  .currency-select {
+    width: 150px;
+    margin: 10px;
+    margin-bottom: 0;
+    padding: 0;
+  }
 }
 
 .coins-container {
   height: 80vh;
   width: 75vw;
-}
-
-mat-toolbar {
-  display: flex;
-  justify-content: space-between;
-  height: auto;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
-
-  mat-form-field {
-    margin: 10px;
-    margin-bottom: 0;
-
-    width: 90px;
-  }
+ 
 }
 
 .logo-img {
   width: 60%;
   margin-left: 25px;
+}
+
+/*Mobile*/
+@media (max-width: 800px) {
+  .toolbar {
+    height: 60px;
+
+    .currency-select {
+      width: auto;
+    }
+  }
+
+  .coins-container {
+    height: auto;
+    width: 100vw;
+  }
 }

@@ -1,51 +1,52 @@
 <div class="banner">
-  <div class="container">
-    <div class="header">
-      <h6>Check all the crypto currency latest updates</h6>
-    </div>
-    <div class="sub-header">
-      <marquee
-        behavior="scroll"
-        onmouseover="stop()"
-        onmouseout="start()"
-        loop="infinite"
-        direction="left"
-      >
-        <div class="row">
-          @for (row of bannerData; track row.symbol) {
-          <ng-container>
-            <div>
-              <div class="card">
-                <img
-                  [ngSrc]="row.iconUrl"
-                  [ngSrcset]="'1x, 2x'"
-                  sizes="45px"
-                  width="45"
-                  height="45"
-                  alt="currency icon"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">
-                    {{ row.name }}
-                  </h5>
-                  <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'"
-                    >{{ row.change }}%</span>
-                  <p class="card-text">
-                    {{ row.price | currency : selectedCurrency }}
-                  </p>
-                </div>
+  <div class="header">
+    <h6>Check all the crypto currency latest updates</h6>
+  </div>
+  <div class="sub-header">
+    <marquee
+      behavior="scroll"
+      onmouseover="stop()"
+      onmouseout="start()"
+      loop="infinite"
+      direction="left"
+    >
+      <div class="row">
+        @for (row of bannerData; track row.symbol) {
+        <ng-container>
+          <div>
+            <div class="card">
+              @if(row.iconUrl){
+              <img
+                [ngSrc]="row.iconUrl"
+                [ngSrcset]="'1x, 2x'"
+                sizes="45px"
+                width="45"
+                height="45"
+                alt="currency icon"
+              />
+              }
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ row.name }}
+                </h5>
+                <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'"
+                  >{{ row.change }}%</span
+                >
+                <p class="card-text">
+                  {{ row.price | currency : selectedCurrency }}
+                </p>
               </div>
             </div>
-          </ng-container>
-          }
-        </div>
-      </marquee>
-    </div>
+          </div>
+        </ng-container>
+        }
+      </div>
+    </marquee>
   </div>
 </div>
 
-<mat-form-field class="mat-form-field" appearance="fill">
-  <mat-label>Filter</mat-label>
+<mat-form-field class="search-field" appearance="fill">
+  <mat-label>Search</mat-label>
   <input
     style="color: rgb(7, 40, 68)"
     matInput
@@ -55,109 +56,107 @@
   />
 </mat-form-field>
 
-<div class="">
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    matSort
-    (matSortChange)="announceSortChange($event)"
-  >
-    <!-- Coin Column -->
-    <ng-container matColumnDef="symbol">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by symbol"
-      >
-        All coins
-      </th>
-      <td mat-cell *matCellDef="let element" class="coin-cell">
-        {{ element.rank }}
-        <img
-          [ngSrc]="element.iconUrl"
-          [ngSrcset]="'1x, 2x'"
-          sizes="35px"
-          width="35"
-          height="35"
-          alt="icon image"
-        />
-        <div class="coin-name">
-          <span class="coin-name-text">{{ element.name }}</span>
-          <span class="coin-symbol-text">{{ element.symbol }}</span>
-        </div>
-      </td>
-    </ng-container>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  (matSortChange)="announceSortChange($event)"
+>
+  <!-- Coin Column -->
+  <ng-container matColumnDef="symbol">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by symbol"
+    >
+      All coins
+    </th>
+    <td mat-cell *matCellDef="let element" class="coin-cell">
+      {{ element.rank }}
+      <img
+        [ngSrc]="element.iconUrl"
+        [ngSrcset]="'1x, 2x'"
+        sizes="35px"
+        width="35"
+        height="35"
+        alt="icon image"
+      />
+      <div class="coin-name">
+        <span class="coin-name-text">{{ element.name }}</span>
+        <span class="coin-symbol-text">{{ element.symbol }}</span>
+      </div>
+    </td>
+  </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price" class="bold-text">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by price"
-      >
-        Price
-      </th>
-      <td class="bold-text" mat-cell *matCellDef="let element">
-        {{ element.price | currency : selectedCurrency }}
-      </td>
-    </ng-container>
+  <!-- Price Column -->
+  <ng-container matColumnDef="price" class="bold-text">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by price"
+    >
+      Price
+    </th>
+    <td class="bold-text" mat-cell *matCellDef="let element">
+      {{ element.price | currency : selectedCurrency }}
+    </td>
+  </ng-container>
 
-    <!-- 24h Change Column -->
-    <ng-container matColumnDef="change" class="bold-text">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by change"
-      >
-        24h
-      </th>
-      <td
-        class="bold-text"
-        mat-cell
-        *matCellDef="let element"
-        [ngClass]="element.change < 0 ? 'red-text' : 'green-text'"
-      >
-        {{ element.change }}%
-      </td>
-    </ng-container>
+  <!-- 24h Change Column -->
+  <ng-container matColumnDef="change" class="bold-text">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by change"
+    >
+      24h
+    </th>
+    <td
+      class="bold-text"
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="element.change < 0 ? 'red-text' : 'green-text'"
+    >
+      {{ element.change }}%
+    </td>
+  </ng-container>
 
-    <!-- Market Cap Column -->
-    <ng-container matColumnDef="marketCap">
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        sortActionDescription="Sort by marketCap"
-      >
-        Market Cap
-      </th>
-      <td class="bold-text" mat-cell *matCellDef="let element">
-        {{ element.marketCap | currency : selectedCurrency }}
-      </td>
-    </ng-container>
+  <!-- Market Cap Column -->
+  <ng-container matColumnDef="marketCap">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by marketCap"
+    >
+      Market Cap
+    </th>
+    <td class="bold-text" mat-cell *matCellDef="let element">
+      {{ element.marketCap | currency : selectedCurrency }}
+    </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr
-      (click)="gotoDetails(row)"
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-    ></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    (click)="gotoDetails(row)"
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+  ></tr>
 
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">
-        No data matching the filter "{{ input.value }}"
-      </td>
-    </tr>
-  </table>
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">
+      No data matching the filter "{{ input.value }}"
+    </td>
+  </tr>
+</table>
 
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 25, 50, 100]"
-    showFirstLastButtons
-    aria-label="Select page of coins list"
-  >
-  </mat-paginator>
-</div>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  showFirstLastButtons
+  aria-label="Select page of coins list"
+>
+</mat-paginator>

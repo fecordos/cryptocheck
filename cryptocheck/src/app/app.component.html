@@ -1,24 +1,23 @@
 <main class="main">
-  <div class="content">
-    <mat-toolbar>
-      <div class="logo">
-        <img class="logo-img" src="/logo1.png" alt="logo name">
-      </div>
-     
-      <mat-form-field>
-        <mat-select
-          (valueChange)="sendCurrencyId($event)"
-          class="text-sm"
-          [(ngModel)]="selectedCurrency"
-        >
-          <mat-option selected value="USD">USD</mat-option>
-          <mat-option value="EUR">EUR</mat-option>
-          <mat-option value="RON">RON</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-toolbar>
-    <div class="coins-container">
-      <router-outlet />
+  <mat-toolbar class="toolbar">
+    <div class="logo">
+      <img class="logo-img" src="/logo1.png" alt="logo name" />
     </div>
+
+    <mat-form-field class="currency-select">
+      <mat-select
+        (valueChange)="sendCurrencyId($event)"
+        class="text-sm"
+        [(ngModel)]="selectedCurrency"
+      >
+        <mat-option selected value="USD">USD</mat-option>
+        <mat-option value="EUR">EUR</mat-option>
+        <mat-option value="RON">RON</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-toolbar>
+  <div class="coins-container">
+    <router-outlet />
   </div>
 </main>

@@ -107,6 +107,14 @@
   font-weight: 600;
 }
 
+.price,
+.changeVolume,
+.marketCap {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .red-text {
   color: red;
 }

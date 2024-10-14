@@ -1,48 +1,55 @@
-.details {
-  width: 30%;
+.info-container {
   display: flex;
+  flex-direction: column;
+}
+
+.currency-info-container {
+  height: 13vh;
+}
+
+.coin-name {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  .logo-img {
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+  }
+
+  span {
+    padding: 5px;
+  }
+
+  .rank {
+    border: 1px solid black;
+    font-size: 1rem;
+    padding: auto;
+  }
+}
+
+.coin-description {
+  font-size: 1.25rem;
+}
+
+.chart-container {
+  height: 57vh;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
   margin-top: 25px;
-  align-items: center;
-  border-right: 2px solid grey;
-  flex-direction: column;
-
-  h3 {
-      font-weight: bold;
-      margin-bottom: 20px;
-  }
-  h6 {
-      width: 100%;
-      padding: 25px;
-      text-align: justify;
-      padding-top: 0;
-      padding-bottom: 15px;
-  }
 }
 
-.coin-info {
-  background: transparent;
-  margin: auto;
+.chart-info {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  img {
-      margin: auto;
-      display: flex;
-  }
-}
 
-.more-details {
-  padding: 10px;
-  margin: 10px;
-  line-height: 50px;
-  .title {
-      font-size: 30px;
-      font-weight: 600;
-  }
-  .value {
-      font-size: 30px;
-      font-weight: 500;
+  span {
+    padding: 15px;
   }
 }
 
@@ -55,28 +62,18 @@
   width: 23%;
 }
 
-.btn-custom:focus {
+.btn-custom:hover {
+  cursor: pointer;
+  background: #009688;
+  color: #fff;
+}
+
+.selected {
+  color: white;
   background: #009688;
   font-weight: 700;
   font-size: 18px;
   border: 1px solid #009688;
-}
-
-.currency-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  border: 2px solid grey;
-  padding: 25px;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .time-period-container {
@@ -97,6 +94,59 @@
   }
 }
 
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+
 * {
   color: #a78585;
+}
+
+.navigate-coins {
+  padding: 25px 0;
+}
+
+.navigate-coins a {
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #009688;
+}
+
+.navigate-coins a:hover {
+  color: #7fc9c3;
+}
+
+@media (max-width: 915px) {
+  .info-container {
+    justify-content: center;
+    align-items: center;
+     
+  }
+
+  .coin-name {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: 3px solid gray;
+
+    h6 {
+      font-size: 1rem;
+    }
+  }
+
+  .coin-description {
+    border: 2px solid red;
+    display: flex;
+  }
+
+  .chart-container {
+    width: 100%;
+    margin: 2px;
+    height: auto;
+  }
 }

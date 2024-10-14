@@ -1,72 +1,111 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="currency-info-container details">
-      <div class="coin-info">
-        @if(coinData?.coin?.iconUrl){
-          <img
-            [ngSrc]="coinData?.coin?.iconUrl"
-            [ngSrcset]="'1x, 2x'"
-            sizes="100px"
-            width="100"
-            height="100"
-            alt="icon image"
-          />
+<div class="navigate-coins">
+  <a routerLink="/coins-list">Coins</a>
+  >
+  <a routerLink="/coin-details">{{ coinData?.coin?.name }}</a>
+</div>
+
+<div class="info-container">
+  <div class="currency-info-container">
+    <div class="coin-name">
+      @if(coinData?.coin?.iconUrl){
+      <img
+        [ngSrc]="coinData?.coin?.iconUrl"
+        [ngSrcset]="'1x, 2x'"
+        sizes="100px"
+        width="100"
+        height="100"
+        alt="icon image"
+        class="logo-img"
+      />
       }
-        <h3 class="coin-name">
-          {{ coinData?.coin?.name }}
-        </h3>
-        <h6 [innerHtml]="coinData?.coin?.description?.split('. ')[0]"></h6>
-        <div class="more-details">
-          <span class="title">Rank: </span>
-          <span class="value">{{ coinData?.coin?.rank }}</span>
-          <br />
-
-          <span class="title">Current Price: </span>
-          <span class="value">{{
-            coinData?.coin?.price | currency : selectedCurrency
-          }}</span>
-          <br />
-
-          <span class="title">Market Cap: </span>
-          <span class="value">{{
-            coinData?.coin?.marketCap | currency : selectedCurrency
-          }}</span>
-        </div>
-      </div>
+      <span>
+        {{ coinData?.coin?.name }}
+      </span>
+      <span>{{ coinData?.coin?.symbol }}</span>
+      <span class="rank">#{{ coinData?.coin?.rank }}</span>
+      <span>{{ coinData?.coin?.price | currency : selectedCurrency }}</span>
     </div>
 
-    <div class="chart-container">
-      <canvas
-        style="width: 900px; height: 600px"
-        baseChart
-        [data]="lineChartData"
-        [options]="lineChartOptions"
-        [type]="lineChartType"
-      ></canvas>
-      <div class="time-period-container">
-        <span>Time period</span>
-        <button (click)="getGraphData('3h')" class="btn btn-custom">
-          3H
-        </button>
-        <button (click)="getGraphData('24h')" class="btn btn-custom">
-          24H
-        </button>
-        <button (click)="getGraphData('7d')" class="btn btn-custom">
-          7D
-        </button>
-        <button (click)="getGraphData('30d')" class="btn btn-custom">
-          30D
-        </button>
-        <button (click)="getGraphData('3m')" class="btn btn-custom">
-          3M
-        </button>
-        <button (click)="getGraphData('1y')" class="btn btn-custom">
-          1Y
-        </button>
-        <button (click)="getGraphData('3y')" class="btn btn-custom">
-          3Y
-        </button>
-      </div>
+    <div class="coin-description">
+      <p [innerHtml]="coinData?.coin?.description?.split('. ')[0]"></p>
+      More info:
+      <a href="{{ coinData?.coin?.websiteUrl }}" target="_blank">{{
+        coinData?.coin?.websiteUrl
+      }}</a>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-info">
+      <span>Price chart</span>
+      <span>24h</span>
+      <span [ngClass]="coinData?.coin?.change < 0 ? 'red-text' : 'green-text'"
+        >@if(coinData?.coin?.change > 0){ +{{ coinData?.coin?.change }}% }
+        @else { {{ coinData?.coin?.change }}% }</span
+      >
+      <span
+        >MarketCap:
+        {{ coinData?.coin?.marketCap | currency : selectedCurrency }}</span
+      >
+    </div>
+    <canvas
+      style="width: 900px; height: 600px"
+      baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="lineChartType"
+    ></canvas>
+    <div class="time-period-container">
+      <span>Time period</span>
+      <button
+        (click)="getGraphData('3h')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '3h' }"
+      >
+        3H
+      </button>
+      <button
+        (click)="getGraphData('24h')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '24h' }"
+      >
+        24H
+      </button>
+      <button
+        (click)="getGraphData('7d')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '7d' }"
+      >
+        7D
+      </button>
+      <button
+        (click)="getGraphData('30d')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '30d' }"
+      >
+        30D
+      </button>
+      <button
+        (click)="getGraphData('3m')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '3m' }"
+      >
+        3M
+      </button>
+      <button
+        (click)="getGraphData('1y')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '1y' }"
+      >
+        1Y
+      </button>
+      <button
+        (click)="getGraphData('3y')"
+        class="btn btn-custom"
+        [ngClass]="{ selected: selectedTimePeriod === '3y' }"
+      >
+        3Y
+      </button>
     </div>
   </div>
 </div>

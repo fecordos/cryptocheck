@@ -30,6 +30,17 @@
   margin-left: 25px;
 }
 
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #009688;
+  
+
+  &:hover {
+    color: #a2cfcb;
+  }
+}
+
 /*Mobile*/
 @media (max-width: 800px) {
   .toolbar {

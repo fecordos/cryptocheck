@@ -30,7 +30,11 @@
                   {{ row.name }}
                 </h5>
                 <span [ngClass]="row.change < 0 ? 'red-text' : 'green-text'"
-                  >{{ row.change }}%</span
+                  > @if(row.change > 0){
+                    +{{ row.change }}%
+                   } @else {
+                    {{ row.change }}%
+                   }</span
                 >
                 <p class="card-text">
                   {{ row.price | currency : selectedCurrency }}
@@ -99,7 +103,7 @@
     >
       Price
     </th>
-    <td class="bold-text" mat-cell *matCellDef="let element">
+    <td class="bold-text price" mat-cell *matCellDef="let element">
       {{ element.price | currency : selectedCurrency }}
     </td>
   </ng-container>
@@ -115,17 +119,21 @@
       24h
     </th>
     <td
-      class="bold-text"
+      class="bold-text changeVolume"
       mat-cell
       *matCellDef="let element"
       [ngClass]="element.change < 0 ? 'red-text' : 'green-text'"
     >
+     @if(element.change > 0){
+      +{{ element.change }}%
+     } @else {
       {{ element.change }}%
+     }
     </td>
   </ng-container>
 
   <!-- Market Cap Column -->
-  <ng-container matColumnDef="marketCap">
+  <ng-container matColumnDef="marketCap" class="">
     <th
       mat-header-cell
       *matHeaderCellDef
@@ -134,7 +142,7 @@
     >
       Market Cap
     </th>
-    <td class="bold-text" mat-cell *matCellDef="let element">
+    <td class="bold-text marketCap" mat-cell *matCellDef="let element">
       {{ element.marketCap | currency : selectedCurrency }}
     </td>
   </ng-container>

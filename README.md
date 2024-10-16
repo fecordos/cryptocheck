@@ -1,5 +1,7 @@
 # CryptoCheck
-A web application designed to provide users with the latest updates on cryptocurrencies. Powered by the Coinranking API, it offers real-time data on the market, including price trends, historical charts, and detailed coin information. Users can select different time periods to view historical data, filter through various currencies (USD, EUR, RON), and switch between multiple currencies for price comparisons.
+- web application designed to provide users with the latest updates on cryptocurrencies.
+- powered by the Coinranking API, it offers real-time data on the market, including price trends, historical charts, and detailed coin information.
+- users can select different time periods to view historical data, filter through various currencies (USD, EUR, RON), and switch between multiple currencies for price comparisons.
 
 **Functionality:**
 

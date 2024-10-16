@@ -78,7 +78,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-
   padding: 15px;
   font-weight: 600;
 
@@ -121,52 +120,4 @@
 
 .green-text {
   color: green;
-}
-
-@media (max-width: 915px) {
-  .banner {
-    margin: 10px 0;
-    padding: 5px;
-
-    h6 {
-      padding: 0;
-      margin: 0 0 5px 0;
-      font-size: 1.25rem;
-      text-align: center;
-    }
-
-    .card {
-      margin: 0;
-      padding: 0;
-
-      .card-title {
-        padding: 0;
-        margin: 0;
-      }
-      .card-text {
-        padding: 0;
-        margin: 0;
-      }
-    }
-  }
-
-  .sub-header {
-    font-size: 0.75rem;
-    height: 140px;
-
-    .row {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .search-field {
-    input {
-      font-size: 1rem;
-    }
-  }
 }

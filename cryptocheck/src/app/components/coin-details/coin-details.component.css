@@ -9,10 +9,11 @@
 
 .coin-name {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   font-size: 1.25rem;
   font-weight: 600;
+  border-bottom: 1px solid #009688;
 
   .logo-img {
     height: 35px;
@@ -24,6 +25,17 @@
     padding: 5px;
   }
 
+  .left-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .coin-symbol {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
+
   .rank {
     border: 1px solid black;
     font-size: 1rem;
@@ -32,7 +44,20 @@
 }
 
 .coin-description {
+  padding: 15px;
   font-size: 1.25rem;
+  text-align: justify;
+ 
+  a {
+    padding: 5px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgb(34, 0, 255);
+
+    &:hover {
+      color: #00235d;
+    }
+  }
 }
 
 .chart-container {
@@ -41,15 +66,28 @@
   flex-direction: column;
 
   align-items: center;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .chart-info {
+  width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 15px;
+  border-bottom: 1px solid #009688;
 
-  span {
-    padding: 15px;
+  .left-side {
+    display: flex;
+    justify-content: center;
+    align-items: first baseline;
+    gap: 1rem;
+
+    .coin-change {
+      font-size: 1rem;
+      font-weight: 500;
+    }
   }
 }
 
@@ -58,14 +96,15 @@
   background: transparent;
   font-weight: 400;
   font-size: 18px;
-  border: 1px solid #320606;
+  border: none;
   width: 23%;
 }
 
 .btn-custom:hover {
-  cursor: pointer;
   background: #009688;
+  border-radius: 5px;
   color: #fff;
+  cursor: pointer;
 }
 
 .selected {
@@ -74,6 +113,7 @@
   font-weight: 700;
   font-size: 18px;
   border: 1px solid #009688;
+  border-radius: 5px;
 }
 
 .time-period-container {
@@ -81,11 +121,16 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 5px;
+  font-size: .85rem;
+  font-weight: 600;
+  border: 1px solid #080000;
+  border-radius: 5px;
+  margin: 10px;
 
   span {
-    border: 1px solid #080000;
-    padding: 4px;
-    color: #b27575;
+    padding: 0px 10px;
+    border-right: 1px solid #080000;
   }
 
   button {
@@ -103,7 +148,7 @@
 }
 
 * {
-  color: #a78585;
+  color: #00235d;
 }
 
 .navigate-coins {
@@ -119,34 +164,4 @@
 
 .navigate-coins a:hover {
   color: #7fc9c3;
-}
-
-@media (max-width: 915px) {
-  .info-container {
-    justify-content: center;
-    align-items: center;
-     
-  }
-
-  .coin-name {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    border: 3px solid gray;
-
-    h6 {
-      font-size: 1rem;
-    }
-  }
-
-  .coin-description {
-    border: 2px solid red;
-    display: flex;
-  }
-
-  .chart-container {
-    width: 100%;
-    margin: 2px;
-    height: auto;
-  }
 }

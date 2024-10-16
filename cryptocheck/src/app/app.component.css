@@ -8,21 +8,36 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 80px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
 
-  .currency-select {
-    width: 150px;
-    margin: 10px;
-    margin-bottom: 0;
-    padding: 0;
+.right-side {
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 0 15px;
+
+  a {
+    padding: 0 35px;
+    
+    &:hover {
+      color: #9cede5;
+    }
   }
+}
+
+.currency-select {
+  width: auto;
+  margin-top: 20px;
+  padding: 0;
 }
 
 .coins-container {
   height: 80vh;
   width: 75vw;
- 
 }
 
 .logo-img {
@@ -34,25 +49,8 @@ a {
   text-decoration: none;
   font-weight: 600;
   color: #009688;
-  
 
   &:hover {
     color: #a2cfcb;
-  }
-}
-
-/*Mobile*/
-@media (max-width: 800px) {
-  .toolbar {
-    height: 60px;
-
-    .currency-select {
-      width: auto;
-    }
-  }
-
-  .coins-container {
-    height: auto;
-    width: 100vw;
   }
 }

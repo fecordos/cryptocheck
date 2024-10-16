@@ -7,45 +7,55 @@
 <div class="info-container">
   <div class="currency-info-container">
     <div class="coin-name">
-      @if(coinData?.coin?.iconUrl){
-      <img
-        [ngSrc]="coinData?.coin?.iconUrl"
-        [ngSrcset]="'1x, 2x'"
-        sizes="100px"
-        width="100"
-        height="100"
-        alt="icon image"
-        class="logo-img"
-      />
-      }
-      <span>
-        {{ coinData?.coin?.name }}
-      </span>
-      <span>{{ coinData?.coin?.symbol }}</span>
-      <span class="rank">#{{ coinData?.coin?.rank }}</span>
-      <span>{{ coinData?.coin?.price | currency : selectedCurrency }}</span>
+      <div class="left-side">
+        @if(coinData?.coin?.iconUrl){
+        <img
+          [ngSrc]="coinData?.coin?.iconUrl"
+          [ngSrcset]="'1x, 2x'"
+          sizes="100px"
+          width="100"
+          height="100"
+          alt="icon image"
+          class="logo-img"
+        />
+        }
+        <span>
+          {{ coinData?.coin?.name }}
+        </span>
+        <span class="coin-symbol">{{ coinData?.coin?.symbol }}</span>
+        <span class="rank">#{{ coinData?.coin?.rank }}</span>
+      </div>
+      <div class="right-side">
+        <span
+          >Market Cap:
+          {{ coinData?.coin?.marketCap | currency : selectedCurrency }}</span
+        >
+      </div>
     </div>
 
     <div class="coin-description">
-      <p [innerHtml]="coinData?.coin?.description?.split('. ')[0]"></p>
-      More info:
-      <a href="{{ coinData?.coin?.websiteUrl }}" target="_blank">{{
-        coinData?.coin?.websiteUrl
-      }}</a>
+      <span [innerHtml]="coinData?.coin?.description?.split('. ')[0]"></span>
+      <a href="{{ coinData?.coin?.websiteUrl }}" target="_blank">More</a>
     </div>
   </div>
 
   <div class="chart-container">
     <div class="chart-info">
-      <span>Price chart</span>
-      <span>24h</span>
-      <span [ngClass]="coinData?.coin?.change < 0 ? 'red-text' : 'green-text'"
-        >@if(coinData?.coin?.change > 0){ +{{ coinData?.coin?.change }}% }
-        @else { {{ coinData?.coin?.change }}% }</span
-      >
+      <div class="left-side">
+        <span>Price chart</span>
+  
+       <div class="coin-change">
+          <span>24h</span>
+          <span [ngClass]="coinData?.coin?.change < 0 ? 'red-text' : 'green-text'"
+            >@if(coinData?.coin?.change > 0){ +{{ coinData?.coin?.change }}% } @else
+            { {{ coinData?.coin?.change }}% }</span
+          >
+       </div>
+      </div>
+
       <span
-        >MarketCap:
-        {{ coinData?.coin?.marketCap | currency : selectedCurrency }}</span
+        >Current price:
+        {{ coinData?.coin?.price | currency : selectedCurrency }}</span
       >
     </div>
     <canvas
